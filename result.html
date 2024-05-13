@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voters</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #votersList {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #votersList p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Voters and Their Votes</h1>
+    <div id="votersList"></div>
+
+    <script>
+        // Retrieve voters data from sessionStorage
+        const voters = JSON.parse(sessionStorage.getItem('voters')) || {};
+
+        // Display voters and their votes
+        const votersListDiv = document.getElementById("votersList");
+        if (Object.keys(voters).length === 0) {
+            votersListDiv.innerHTML = "<p>No votes recorded yet.</p>";
+        } else {
+            Object.entries(voters).forEach(([voter, vote]) => {
+                const voterInfo = document.createElement("p");
+                voterInfo.textContent = `${voter}: Voted for ${vote}`;
+                votersListDiv.appendChild(voterInfo);
+            });
+        }
+    </script>
+</body>
+</html>
